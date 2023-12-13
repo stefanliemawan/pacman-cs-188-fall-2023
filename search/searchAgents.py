@@ -36,7 +36,7 @@ Good luck and happy searching!
 
 import time
 from typing import Any, List, Tuple
-
+import math
 import pacman
 import search
 import util
@@ -445,16 +445,12 @@ def countWallsBetweenPoints(currentPosition, closestCorner, walls, multiplierAdd
 
 # 1192 nodes
 def calculateCornerHeuristic(currentPosition, corners, walls):
-    import scipy.spatial.distance
-
     distancesToCorners = []
 
     for corner in corners:
         distances = {}
         distances["manhattan"] = util.manhattanDistance(currentPosition, corner)
-        distances["euclidean"] = scipy.spatial.distance.euclidean(
-            currentPosition, corner
-        )
+        distances["euclidean"] = math.dist(currentPosition, corner)
         distances["wallsCount"] = countWallsBetweenPoints(
             currentPosition, corner, walls, multiplierAddition=0.35
         )
